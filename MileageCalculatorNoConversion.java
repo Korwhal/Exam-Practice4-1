@@ -1,12 +1,12 @@
 /**
- * File: csci1302/ch16/MileageCalculator.java
+ * File: PAssign08.java
  * Package: ch16
- * @author Christopher Jeschhkeit and Hunter Jones
+ * @author Hunter Jones
  * Created on: Apr 16, 2022
  * Last Modified: Apr 16, 2022
- * Description: switch out radiobuttons for a combo box to calculate MPG
+ * Description: switch out radio buttons for a combo box to calculate MPG
  */
-package ch16;
+package JavaFX;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -22,7 +22,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class MileageCalculatorNoConversion extends Application {
+public class PAssign08 extends Application {
 	// default values/strings
 	private double txtWidth = 125.0;
 	private String defaultCalc = String.format("%.2f", 0.00);
@@ -112,13 +112,23 @@ public class MileageCalculatorNoConversion extends Application {
 			lblCapacity.setText(altCapacity);
 			lblDistance.setText(altMileage);
 			lblResult.setText(altResult);
-		
+			if (tfCapacity.getText() != null && !tfCapacity.getText().isEmpty() && tfDistance.getText() != null
+                    && !tfDistance.getText().isEmpty()) {
+                tfDistance.setText(String.format("%.2f", (Double.parseDouble(tfDistance.getText()) * 1.609)));
+                tfCapacity.setText(String.format("%.2f", (Double.parseDouble(tfCapacity.getText()) * 3.785)));
+            }
 		} else {
 			// update labels
 			lblCapacity.setText(defaultCapacity);
 			lblDistance.setText(defaultMileage);
 			lblResult.setText(defaultResult);
+			if (tfCapacity.getText() != null && !tfCapacity.getText().isEmpty() && tfDistance.getText() != null
+                    && !tfDistance.getText().isEmpty()) {
+                tfDistance.setText(String.format("%.2f", (Double.parseDouble(tfDistance.getText()) / 1.609)));
+                tfCapacity.setText(String.format("%.2f", (Double.parseDouble(tfCapacity.getText()) / 3.785)));
+            }
 		}
+		calcMileage();
 	}
 
 	/**
